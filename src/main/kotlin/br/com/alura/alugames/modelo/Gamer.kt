@@ -17,6 +17,7 @@ data class Gamer(var nome: String, var email: String) {
         private set
     val jogosBuscados = mutableListOf<Jogo?>()
     val jogosAlugados = mutableListOf<Aluguel>()
+    var plano: Plano = PlanoAvulso("BRONZE")
 
     constructor(nome: String, email: String, dataNascimento: String, usuario: String) : this(nome, email) {
         this.dataNascimento = dataNascimento
@@ -54,6 +55,12 @@ data class Gamer(var nome: String, var email: String) {
         if (nome.isBlank()) {
             throw IllegalArgumentException("Nome esta em branco")
         }
+    }
+
+    fun jogosDoMes(mes: Int):List<Jogo> {
+        return jogosAlugados
+            .filter { aluguel -> aluguel.periodo.dataInicial.monthValue == mes }
+            .map { aluguel -> aluguel.jogo }
     }
 
     companion object {
