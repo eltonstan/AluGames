@@ -1,6 +1,5 @@
 package br.com.alura.alugames.modelo
 
-import org.example.br.com.alura.alugames.modelo.Jogo
 import java.util.Scanner
 import kotlin.random.Random
 

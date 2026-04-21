@@ -1,4 +1,4 @@
-package org.example.br.com.alura.alugames.modelo
+package br.com.alura.alugames.modelo
 
 class Jogo(val titulo:String, val capa:String) {
 
