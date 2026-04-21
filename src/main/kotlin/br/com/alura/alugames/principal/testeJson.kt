@@ -3,6 +3,8 @@ package br.com.alura.alugames.principal
 import br.com.alura.alugames.modelo.Periodo
 import br.com.alura.alugames.modelo.PlanoAssinatura
 import br.com.alura.alugames.servicos.ConsumoApi
+import com.google.gson.GsonBuilder
+import java.io.File
 import java.time.LocalDate
 
 fun main() {
@@ -12,9 +14,15 @@ fun main() {
     val listaJogoJson = consumo.buscaJogosJson()
 
     val gamerCaroline = listaGamers.get(3)
+
     val jogoResidentVillage = listaJogoJson.get(10)
     val jogoSpider = listaJogoJson.get(13)
     val jogoTheLastOfUs = listaJogoJson.get(2)
+    val jogoDandara = listaJogoJson.get(5)
+    val jogoAssassins = listaJogoJson.get(4)
+    val jogoCyber = listaJogoJson.get(6)
+    val jogoGod = listaJogoJson.get(7)
+    val jogoSkyrim = listaJogoJson.get(18)
 
     val periodo1 = Periodo(LocalDate.now(), LocalDate.now().plusDays(7))
     val periodo2 = Periodo(LocalDate.now(), LocalDate.now().plusDays(3))
@@ -43,5 +51,31 @@ fun main() {
 
     gamerCamila.alugaJogo(jogoResidentVillage, periodo1)
     println(gamerCamila.jogosAlugados)
+
+    gamerCamila.recomendarJogo(jogoResidentVillage, 7)
+    gamerCamila.recomendarJogo(jogoTheLastOfUs, 10)
+
+    gamerCaroline.recomendarJogo(jogoResidentVillage, 8)
+    gamerCaroline.recomendarJogo(jogoTheLastOfUs, 9)
+    gamerCamila.recomendarJogo(jogoAssassins, 8)
+    gamerCamila.recomendarJogo(jogoCyber, 7)
+    gamerCamila.recomendarJogo(jogoGod, 10)
+    gamerCamila.recomendarJogo(jogoDandara, 8)
+    gamerCamila.recomendarJogo(jogoSkyrim, 8)
+    gamerCamila.recomendarJogo(jogoSpider, 6)
+
+    println("Recomendações da Camila")
+    println(gamerCamila.jogosRecomendados)
+    println("Recomendações da Caroline")
+    println(gamerCaroline.jogosRecomendados)
+
+    val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+    val serializacao = gson.toJson(gamerCamila.jogosRecomendados)
+    println("serializacao")
+    println(serializacao)
+
+    val arquivo = File("jogosRecomendados-${gamerCamila.nome}.json")
+    arquivo.writeText(serializacao)
+    println(arquivo.absolutePath)
 
 }
