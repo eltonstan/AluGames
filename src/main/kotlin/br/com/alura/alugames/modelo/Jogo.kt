@@ -28,9 +28,9 @@ class Jogo(@Expose val titulo:String,
                 "Título: $titulo \n" +
                 "Capa: $capa \n" +
                 "Descricao: $descricao \n" +
-                "Preço: $preco" +
-                "Reputação: $media" +
-                "Id: $id"
+                "Preço: $preco \n" +
+                "Reputação: $media \n" +
+                "Id: $id \n"
     }
 
 
